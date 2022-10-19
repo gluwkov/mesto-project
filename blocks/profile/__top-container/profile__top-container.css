@@ -1,0 +1,12 @@
+.profile__top-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: baseline;
+    gap: 18px;
+}
+
+@media (max-width: 767px) {
+    .profile__top-container{
+        gap: 10px;
+    }
+}

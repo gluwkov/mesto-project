@@ -1,0 +1,8 @@
+.photo-card {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
+}

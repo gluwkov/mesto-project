@@ -1,0 +1,14 @@
+.profile__info {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0 auto 0 30px;
+    gap: 16px;
+}
+
+@media (max-width: 767px) {
+    .profile__info{
+        gap: 14px;
+        margin: 26px auto 36px;
+        align-items: center;
+    }
+}

@@ -1,0 +1,7 @@
+.photo-card__bottom-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 15px 31px 21px;
+}
