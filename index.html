@@ -19,53 +19,53 @@
             <div class="profile__info">
                 <div class="profile__name-wrapper">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button type="button" class="profile__edit-button"></button>
+                    <button type="button" class="profile__edit-button" aria-label="Изменить"></button>
                 </div>
                 <p class="profile__description">Исследователь океана</p>
             </div>
-            <button type="button" class="profile__add-button"></button>
+            <button type="button" class="profile__add-button" aria-label="Добавить"></button>
         </section>
         <section aria-label="Фотографии" class="photos">
             <article class="photo-card">
                 <img class="photo-card__image" src="./images/sochi.jpg" alt="Сочи">
                 <div class="photo-card__info">
                     <h2 class="photo-card__title">Сочи</h2>
-                    <button type="submit" class="photo-card__like-button"></button>
+                    <button type="button" class="photo-card__like-button" aria-label="Лайк"></button>
                 </div>
             </article>
             <article class="photo-card">
                 <img class="photo-card__image" src="./images/saint-petersburg.jpg" alt="Санкт-Петербург">
                 <div class="photo-card__info">
                     <h2 class="photo-card__title">Санкт-Петербург</h2>
-                    <button type="submit" class="photo-card__like-button"></button>
+                    <button type="button" class="photo-card__like-button" aria-label="Лайк"></button>
                 </div>
             </article>
             <article class="photo-card">
                 <img class="photo-card__image" src="./images/sortavala.jpg" alt="Сортавала">
                 <div class="photo-card__info">
                     <h2 class="photo-card__title">Сортавала</h2>
-                    <button type="submit" class="photo-card__like-button"></button>
+                    <button type="button" class="photo-card__like-button" aria-label="Лайк"></button>
                 </div>
             </article>
             <article class="photo-card">
                 <img class="photo-card__image" src="./images/petrozavodks.jpg" alt="Петрозаводск">
                 <div class="photo-card__info">
                     <h2 class="photo-card__title">Петрозаводск</h2>
-                    <button type="submit" class="photo-card__like-button"></button>
+                    <button type="button" class="photo-card__like-button" aria-label="Лайк"></button>
                 </div>
             </article>
             <article class="photo-card">
                 <img class="photo-card__image" src="./images/moscow.jpg" alt="Москва">
                 <div class="photo-card__info">
                     <h2 class="photo-card__title">Москва</h2>
-                    <button type="submit" class="photo-card__like-button"></button>
+                    <button type="button" class="photo-card__like-button" aria-label="Лайк"></button>
                 </div>
             </article>
             <article class="photo-card">
                 <img class="photo-card__image" src="./images/nikola-lenivets.jpg" alt="Никола-Ленивец">
                 <div class="photo-card__info">
                     <h2 class="photo-card__title">Никола-Ленивец</h2>
-                    <button type="submit" class="photo-card__like-button"></button>
+                    <button type="button" class="photo-card__like-button" aria-label="Лайк"></button>
                 </div>
             </article>
         </section>
@@ -79,13 +79,13 @@
                 <fieldset class="popup__input-container">
                     <h2 class="popup__heading">Редактировать профиль</h2>
                     <div>
-                        <input class="popup__item popup__item_element_text" type="text" value="Жак-Ив Кусто">
-                        <input class="popup__item popup__item_element_text" type="text" value="Исследователь океана">
+                        <input class="popup__item popup__item_element_text" name="name" type="text" value="Жак-Ив Кусто">
+                        <input class="popup__item popup__item_element_text" name="description" type="text" value="Исследователь океана">
                     </div>
-                    <input class="popup__submit" type="submit" value="Сохранить">
+                    <input class="popup__submit" name="save-button" type="submit" value="Сохранить">
                 </fieldset>
             </form>
-            <button type="button" class="popup__close"></button>
+            <button type="button" class="popup__close" aria-label="Закрыть"></button>
         </div>
     </div>
 </body>
