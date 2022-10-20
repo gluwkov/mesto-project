@@ -1,5 +1,5 @@
 .photo-card__like-button {
-    background-image: url(../../../images/like.png);
+    background-image: url(../../../images/like.svg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -16,6 +16,6 @@
 }
 
 .photo-card__like-button:active {
-    background-image: url(../../../images/like-black.png);
+    background-image: url(../../../images/like-black.svg);
     opacity: 1;
 }

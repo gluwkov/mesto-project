@@ -1,4 +1,4 @@
-.profile__top-container {
+.profile__name-wrapper {
     display: flex;
     flex-flow: row nowrap;
     align-items: baseline;
@@ -6,7 +6,7 @@
 }
 
 @media (max-width: 767px) {
-    .profile__top-container{
+    .profile__name-wrapper{
         gap: 10px;
     }
 }

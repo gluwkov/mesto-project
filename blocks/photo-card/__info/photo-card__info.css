@@ -1,4 +1,4 @@
-.photo-card__bottom-container {
+.photo-card__info {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;

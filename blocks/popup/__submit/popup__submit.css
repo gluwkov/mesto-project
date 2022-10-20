@@ -1,4 +1,4 @@
-.popup__item_element_submit {
+.popup__submit {
     background: #000000;
     border-radius: 2px;
     font-style: normal;
@@ -13,12 +13,12 @@
     transition: opacity 0.5s;
 }
 
-.popup__item_element_submit:hover{
+.popup__submit:hover{
     opacity: 0.8;
 }
 
 @media (max-width: 767px) {
-    .popup__item_element_submit {
+    .popup__submit {
         font-size: 14px;
         line-height: 17px;
         height: 46px;
