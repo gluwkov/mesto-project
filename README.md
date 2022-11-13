@@ -7,7 +7,7 @@
 
 **Какие технологии были использованы**
 
-HTML, CSS, Flexbox, Grid
+HTML, CSS, Javascript, Flexbox, Grid
 
 **Ссылка на сайт проекта** 
 

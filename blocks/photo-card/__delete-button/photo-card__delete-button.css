@@ -1,17 +1,17 @@
-.photo-card__like-button {
-    background-image: url(../../../images/like.svg);
+.photo-card__delete-button {
+    background-image: url(../../../images/delete-button.svg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-color: rgba(0, 0, 0, 0);
     border-width: 0;
     padding: 0;
-    width: 22px;
+    width: 18px;
     height: 19px;
     transition: opacity 0.5s;
     cursor: pointer;
-}
 
-.photo-card__like-button:hover {
-    opacity: 0.5;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
