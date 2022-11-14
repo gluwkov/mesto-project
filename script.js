@@ -15,8 +15,8 @@ const jobInput = document.querySelector('#jobInput');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__description');
 
-let title = document.querySelector('#titleInput');
-let link = document.querySelector('#linkInput');
+const title = document.querySelector('#titleInput');
+const link = document.querySelector('#linkInput');
 
 const popupImage = document.querySelector('.formPhotoContainer__image');
 const popupCaption = document.querySelector('.formPhotoContainer__caption');
@@ -70,6 +70,7 @@ function addFormSubmitHandler(evt) {
     createPhotoCard(title.value, link.value);
     
     evt.preventDefault();
+    evt.target.reset();
     closePopup(addForm);
 }
 //
