@@ -2,7 +2,7 @@ const editButton = document.querySelector('#editButton');
 const addButton = document.querySelector('#addButton');
 const createButton = document.querySelector('#createButton');
 const saveButton = document.querySelector('#saveButton');
-const closeButton = document.querySelectorAll('.popup__close');
+const closeButtons = document.querySelectorAll('.popup__close');
 
 const editForm = document.querySelector('.popup_form_edit');
 const addForm = document.querySelector('.popup_form_add');
@@ -10,47 +10,28 @@ const imageForm = document.querySelector('.popup_form_photo');
 
 const photoCardsContainer = document.querySelector('.photos');
 
-let nameInput = document.querySelector('#nameInput');
-let jobInput = document.querySelector('#jobInput');
-let profileName = document.querySelector('.profile__name');
-let profileJob = document.querySelector('.profile__description');
+const nameInput = document.querySelector('#nameInput');
+const jobInput = document.querySelector('#jobInput');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__description');
+
+let title = document.querySelector('#titleInput');
+let link = document.querySelector('#linkInput');
 
 const popupImage = document.querySelector('.formPhotoContainer__image');
 const popupCaption = document.querySelector('.formPhotoContainer__caption');
 
-editButton.addEventListener('click', function () {
-    editForm.classList.add('popup_opened');
-
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-})
-
-addButton.addEventListener('click', function () {
-    addForm.classList.add('popup_opened')
-})
-
-createButton.addEventListener('click', function () {
-    let title = document.querySelector('#titleInput');
-    let link = document.querySelector('#linkInput');
-
-    createPhotoCard(title.value, link.value);
-});
-
-function closePopup(element) {
-    element.addEventListener('click', function (evt) {
-        evt.target.closest('.popup').classList.remove('popup_opened')
-    })
+const photoCardTemplate = document.querySelector('#photoCardTemplate').content;
+//functions
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
 }
 
-saveButton.addEventListener('click', function () {
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-})
+function openPopup(popup) {
+    popup.classList.add('popup_opened');
+}
 
-closeButton.forEach(closePopup);
-
-function createPhotoCard(titleValue, linkValue) {
-    const photoCardTemplate = document.querySelector('#photoCardTemplate').content;
+function copyPhotoCard(titleValue, linkValue) {
     const photoCardElement = photoCardTemplate.querySelector('.photo-card').cloneNode(true);
 
     photoCardElement.querySelector('.photo-card__image').src = linkValue;
@@ -66,11 +47,50 @@ function createPhotoCard(titleValue, linkValue) {
         popupImage.src = evt.target.src;
         popupImage.alt = evt.target.alt;
         popupCaption.textContent = evt.target.alt;
-        imageForm.classList.add('popup_opened');
+        openPopup(imageForm);
     })
 
+    return photoCardElement;
+}
+
+function createPhotoCard(titleValue, linkValue) {
+    const photoCardElement = copyPhotoCard(titleValue, linkValue);
     photoCardsContainer.prepend(photoCardElement);
 }
+
+function editFormSubmitHandler(evt) {
+    profileName.textContent = nameInput.value;
+    profileJob.textContent = jobInput.value;
+
+    evt.preventDefault();
+    closePopup(editForm);
+}
+
+function addFormSubmitHandler(evt) {
+    createPhotoCard(title.value, link.value);
+    
+    evt.preventDefault();
+    closePopup(addForm);
+}
+//
+closeButtons.forEach((button) => {
+    const popup = button.closest('.popup');
+    button.addEventListener('click', () => closePopup(popup));
+});
+
+addButton.addEventListener('click', function () {
+    openPopup(addForm);
+})
+
+editButton.addEventListener('click', function () {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileJob.textContent;
+
+    openPopup(editForm);
+})
+
+addForm.addEventListener('submit', addFormSubmitHandler)
+editForm.addEventListener('submit', editFormSubmitHandler)
 
 const initialCards = [
     {
@@ -99,17 +119,9 @@ const initialCards = [
     }
 ];
 
-initialCards.forEach(function(element){
+initialCards.forEach(function (element) {
     const items = Object.keys(element);
     const name = element[items[0]];
     const link = element[items[1]];
     createPhotoCard(name, link);
 })
-
-function formSubmitHandler(evt) {
-    evt.preventDefault();
-    evt.target.closest('.popup').classList.remove('popup_opened')
-}
-
-addForm.addEventListener('submit', formSubmitHandler)
-editForm.addEventListener('submit', formSubmitHandler)
