@@ -1,37 +1,15 @@
-const editButton = document.querySelector('#editButton');
-const addButton = document.querySelector('#addButton');
-const createButton = document.querySelector('#createButton');
-const saveButton = document.querySelector('#saveButton');
-const closeButtons = document.querySelectorAll('.popup__close');
+import { openPopup } from "./modal.js";
 
-const editForm = document.querySelector('.popup_form_edit');
-const addForm = document.querySelector('.popup_form_add');
 const imageForm = document.querySelector('.popup_form_photo');
 
 const photoCardsContainer = document.querySelector('.photos');
-
-const nameInput = document.querySelector('#nameInput');
-const jobInput = document.querySelector('#jobInput');
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__description');
-
-const title = document.querySelector('#titleInput');
-const link = document.querySelector('#linkInput');
 
 const popupImage = document.querySelector('.formPhotoContainer__image');
 const popupCaption = document.querySelector('.formPhotoContainer__caption');
 
 const photoCardTemplate = document.querySelector('#photoCardTemplate').content;
-//functions
-function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-}
 
-function openPopup(popup) {
-    popup.classList.add('popup_opened');
-}
-
-function copyPhotoCard(titleValue, linkValue) {
+export function copyPhotoCard(titleValue, linkValue) {
     const photoCardElement = photoCardTemplate.querySelector('.photo-card').cloneNode(true);
 
     photoCardElement.querySelector('.photo-card__image').src = linkValue;
@@ -53,45 +31,10 @@ function copyPhotoCard(titleValue, linkValue) {
     return photoCardElement;
 }
 
-function createPhotoCard(titleValue, linkValue) {
+export function createPhotoCard(titleValue, linkValue) {
     const photoCardElement = copyPhotoCard(titleValue, linkValue);
     photoCardsContainer.prepend(photoCardElement);
 }
-
-function editFormSubmitHandler(evt) {
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-
-    evt.preventDefault();
-    closePopup(editForm);
-}
-
-function addFormSubmitHandler(evt) {
-    createPhotoCard(title.value, link.value);
-    
-    evt.preventDefault();
-    evt.target.reset();
-    closePopup(addForm);
-}
-//
-closeButtons.forEach((button) => {
-    const popup = button.closest('.popup');
-    button.addEventListener('click', () => closePopup(popup));
-});
-
-addButton.addEventListener('click', function () {
-    openPopup(addForm);
-})
-
-editButton.addEventListener('click', function () {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-
-    openPopup(editForm);
-})
-
-addForm.addEventListener('submit', addFormSubmitHandler)
-editForm.addEventListener('submit', editFormSubmitHandler)
 
 const initialCards = [
     {

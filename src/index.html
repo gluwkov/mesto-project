@@ -4,18 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="./pages/index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
 </head>
 
 <body class="root">
     <header class="header">
-        <img class="header__logo" src="./images/logo.svg" alt="Логотип Место">
+        <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип Место">
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__picture" src="./images/profile-picture.jpg" alt="Фотография профиля">
+            <img class="profile__picture" src="<%=require('./images/profile-picture.jpg')%>" alt="Фотография профиля">
             <div class="profile__info">
                 <div class="profile__name-wrapper">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -34,12 +33,14 @@
     </footer>
     <div class="popup popup_form_edit">
         <div class="popup__container">
-            <form id='editForm' name="edit-form">
+            <form class="form" id='editForm' name="edit-form">
                 <fieldset class="popup__input-container">
                     <h2 class="popup__heading">Редактировать профиль</h2>
                     <div>
-                        <input id='nameInput' class="popup__item popup__item_element_text" name="name" type="text" value="">
-                        <input id='jobInput' class="popup__item popup__item_element_text" name="description" type="text" value="">
+                        <input id='nameInput' class="popup__item popup__item_element_text" name="name" type="text" value="" minlength="2" maxlength="40" pattern="^[А-Яа-яa-zA-Z\-\s]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+                        <span class="popup__input-error nameInput-error"></span>
+                        <input id='jobInput' class="popup__item popup__item_element_text" name="description" type="text" value="" minlength="2" maxlength="400" pattern="^[А-Яа-яa-zA-Z\-\s]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+                        <span class="popup__input-error jobInput-error"></span>
                     </div>
                     <input id="saveButton" class="popup__submit" name="save-button" type="submit" value="Сохранить">
                 </fieldset>
@@ -49,12 +50,14 @@
     </div>
     <div class="popup popup_form_add">
         <div class="popup__container">
-            <form id='addForm' name="add-form">
+            <form class="form" id='addForm' name="add-form">
                 <fieldset class="popup__input-container">
                     <h2 class="popup__heading">Новое место</h2>
                     <div>
-                        <input id='titleInput' class="popup__item popup__item_element_text" name="title" type="text" placeholder="Название" value="">
-                        <input id='linkInput' class="popup__item popup__item_element_text" name="link" type="text" placeholder="Ссылка на картинку" value="">
+                        <input id='titleInput' class="popup__item popup__item_element_text" name="title" type="text" placeholder="Название" value="" minlength="2" maxlength="30" pattern="^[А-Яа-яa-zA-Z\-\s]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+                        <span class="popup__input-error titleInput-error"></span>
+                        <input id='linkInput' class="popup__item popup__item_element_text" name="link" type="url" placeholder="Ссылка на картинку" value="" required>
+                        <span class="popup__input-error linkInput-error"></span>
                     </div>
                     <input id='createButton' class="popup__submit" name="create-button" type="submit" value="Создать">
                 </fieldset>
@@ -81,7 +84,6 @@
             </div>
         </article>
     </template>
-    <script src="./script.js"></script>
 </body>
 
 </html>
