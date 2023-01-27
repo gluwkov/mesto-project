@@ -2,7 +2,7 @@ import '../pages/index.css';
 
 import { copyPhotoCard, photoCardsContainer } from './card.js';
 import { enableValidation } from "./validate.js";
-import { closeButtons, popupProfileForm, popupPlaceForm, nameInput, jobInput, profileName, profileJob, profileButton, placeButton, title, link, openPopup, closePopup } from './modal.js';
+import { closeButtons, popupProfileForm, popupPlaceForm, nameInput, jobInput, profileName, profileJob, profileButton, placeButton, title, link, openPopup, closePopup, saveButton, createButton } from './modal.js';
 
 export function createPhotoCard(titleValue, linkValue) {
     const photoCardElement = copyPhotoCard(titleValue, linkValue);
@@ -60,12 +60,18 @@ function placeFormSubmitHandler(evt) {
 }
 
 placeButton.addEventListener('click', function () {
+    createButton.disabled = true;
+    createButton.classList.add('popup__submit_status_disabled');
+
     openPopup(popupPlaceForm);
 })
 
 profileButton.addEventListener('click', function () {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
+
+    saveButton.disabled = true;
+    saveButton.classList.add('popup__submit_status_disabled');
 
     openPopup(popupProfileForm);
 })
