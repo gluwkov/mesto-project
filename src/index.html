@@ -14,22 +14,28 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__picture" src="<%=require('./images/profile-picture.jpg')%>" alt="Фотография профиля">
+            <div class="profile__picture-wrapper">
+                <img class="profile__picture"
+                    src="https://sun9-east.userapi.com/sun9-44/s/v1/ig2/7cg92f21B89OS7fdCKq9LKrCP3CwvZpeLguQ4bz_rDVMqP15eb1H44ZHaT5efDrGYiQzCFIzjVCczKBShK2N3t6x.jpg?size=330x330&quality=96&type=album"
+                    alt="Фотография профиля">
+                <div class="profile__picture-edit"></div>
+            </div>
+
             <div class="profile__info">
                 <div class="profile__name-wrapper">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <h1 class="profile__name">gluwkov</h1>
                     <button id="editButton" type="button" class="profile__edit-button" aria-label="Изменить"></button>
                 </div>
-                <p class="profile__description">Исследователь океана</p>
+                <p class="profile__description">Исследователь интернета</p>
             </div>
             <button id="addButton" type="button" class="profile__add-button" aria-label="Добавить"></button>
         </section>
         <section aria-label="Фотографии" class="photos">
-            
+
         </section>
     </main>
     <footer class="footer">
-        <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+        <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
     <div class="popup popup_form_edit">
         <div class="popup__container">
@@ -37,9 +43,15 @@
                 <fieldset class="popup__input-container">
                     <h2 class="popup__heading">Редактировать профиль</h2>
                     <div>
-                        <input id='nameInput' class="popup__item popup__item_element_text" name="name" type="text" value="" placeholder="Имя" minlength="2" maxlength="40" pattern="^[А-Яа-яa-zA-Z\-\s]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+                        <input id='nameInput' class="popup__item popup__item_element_text" name="name" type="text"
+                            value="" placeholder="Имя" minlength="2" maxlength="40" pattern="^[А-Яа-яa-zA-Z\-\s]+$"
+                            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                            required>
                         <span class="popup__input-error nameInput-error"></span>
-                        <input id='jobInput' class="popup__item popup__item_element_text" name="description" type="text" value="" placeholder="О себе" minlength="2" maxlength="400" pattern="^[А-Яа-яa-zA-Z\-\s]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+                        <input id='jobInput' class="popup__item popup__item_element_text" name="description" type="text"
+                            value="" placeholder="О себе" minlength="2" maxlength="400" pattern="^[А-Яа-яa-zA-Z\-\s]+$"
+                            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                            required>
                         <span class="popup__input-error jobInput-error"></span>
                     </div>
                     <input id="saveButton" class="popup__submit" name="save-button" type="submit" value="Сохранить">
@@ -54,9 +66,13 @@
                 <fieldset class="popup__input-container">
                     <h2 class="popup__heading">Новое место</h2>
                     <div>
-                        <input id='titleInput' class="popup__item popup__item_element_text" name="title" type="text" placeholder="Название" value="" minlength="2" maxlength="30" pattern="^[А-Яа-яa-zA-Z\-\s]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+                        <input id='titleInput' class="popup__item popup__item_element_text" name="title" type="text"
+                            placeholder="Название" value="" minlength="2" maxlength="30" pattern="^[А-Яа-яa-zA-Z\-\s]+$"
+                            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+                            required>
                         <span class="popup__input-error titleInput-error"></span>
-                        <input id='linkInput' class="popup__item popup__item_element_text" name="link" type="url" placeholder="Ссылка на картинку" value="" required>
+                        <input id='linkInput' class="popup__item popup__item_element_text" name="link" type="url"
+                            placeholder="Ссылка на картинку" value="" required>
                         <span class="popup__input-error linkInput-error"></span>
                     </div>
                     <input id='createButton' class="popup__submit" name="createButton" type="submit" value="Создать">
@@ -68,8 +84,25 @@
     <div class="popup popup_form_photo">
         <div class="popup__container popup__container_form_photo formPhotoContainer">
             <form id='addForm' name="add-form">
-                <img class ='formPhotoContainer__image' src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" alt="">
+                <img class='formPhotoContainer__image'
+                    src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" alt="">
                 <p class='formPhotoContainer__caption'></p>
+            </form>
+            <button type="button" class="popup__close" aria-label="Закрыть"></button>
+        </div>
+    </div>
+    <div class="popup popup_form_avatar">
+        <div class="popup__container">
+            <form class="form" id='avatarForm' name="avatarForm">
+                <fieldset class="popup__input-container">
+                    <h2 class="popup__heading">Обновить аватар</h2>
+                    <div>
+                        <input id='avatarLinkInput' class="popup__item popup__item_element_text" name="avatarLink"
+                            type="url" placeholder="Cсылка на картинку" value="" required>
+                        <span class="popup__input-error avatarLinkInput-error"></span>
+                        <input id='avatarSubmitButton' class="popup__submit" name="avatarSubmitButton" type="submit"
+                            value="Сохранить">
+                </fieldset>
             </form>
             <button type="button" class="popup__close" aria-label="Закрыть"></button>
         </div>
@@ -80,7 +113,10 @@
             <button type="button" class="photo-card__delete-button" aria-label="Удалить"></button>
             <div class="photo-card__info">
                 <h2 class="photo-card__title"></h2>
-                <button type="button" class="photo-card__like-button" aria-label="Лайк"></button>
+                <div class="photo-card__like-wrapper">
+                    <button type="button" class="photo-card__like-button" aria-label="Лайк"></button>
+                    <label class="photo-card__like-count"></label>
+                </div>
             </div>
         </article>
     </template>

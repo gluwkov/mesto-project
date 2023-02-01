@@ -1,63 +1,66 @@
 import '../pages/index.css';
 
-import { copyPhotoCard, photoCardsContainer } from './card.js';
+import { createCard, addCardToDOM } from './card.js';
 import { enableValidation } from "./validate.js";
-import { closeButtons, popupProfileForm, popupPlaceForm, nameInput, jobInput, profileName, profileJob, profileButton, placeButton, title, link, openPopup, closePopup, saveButton, createButton } from './modal.js';
+import { closeButtons, popupProfileForm, popupPlaceForm, popupAvatarForm, avatarPicture, avatarLink, avatarButton, avatarSaveButton, nameInput, jobInput, profileName, profileJob, profileButton, placeButton, title, link, openPopup, closePopup, saveButton, createButton } from './modal.js';
+import { getAppInfo, postNewCard, setUserAvatar, setUserInfo } from './api.js';
 
-export function createPhotoCard(titleValue, linkValue) {
-    const photoCardElement = copyPhotoCard(titleValue, linkValue);
-    photoCardsContainer.prepend(photoCardElement);
-}
+export let userId;
 
-const initialCards = [
-    {
-        name: 'Чёрная речка',
-        link: 'https://images.unsplash.com/photo-1635530043255-eb163c579d4c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'
-    },
-    {
-        name: 'Никола-Ленивец',
-        link: 'https://images.unsplash.com/photo-1603617913858-0cc7fcbf7eab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'
-    },
-    {
-        name: 'Москва',
-        link: 'https://images.unsplash.com/photo-1635847421556-f39631511aa3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
-    },
-    {
-        name: 'Санкт-Петербург',
-        link: 'https://images.unsplash.com/photo-1599756972648-196c48e6fca0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
-    },
-    {
-        name: 'Кинерма',
-        link: 'https://images.unsplash.com/photo-1559029881-7cfd01ac1f18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80'
-    },
-    {
-        name: 'Сочи',
-        link: 'https://images.unsplash.com/photo-1608926632580-067ba78be72b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1444&q=80'
-    }
-];
+const setProfileData = (user) => {
+    profileName.textContent = user.name,
+        profileJob.textContent = user.about,
+        avatarPicture.src = user.avatar,
+        userId = user._id
+};
 
-initialCards.forEach(function (element) {
-    const items = Object.keys(element);
-    const name = element[items[0]];
-    const link = element[items[1]];
-    createPhotoCard(name, link);
-})
+const renderPage = () => {
+    getAppInfo()
+        .then(([user, cards]) => {
+            setProfileData(user);
+            cards.reverse().forEach(item => {
+                addCardToDOM(createCard(item.name, item.link, item.likes, item.owner._id, item._id));
+            });
+        })
+        .catch((err) => console.log(err));
+};
 
 function profileFormSubmitHandler(evt) {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
+
+    setUserInfo(nameInput.value, jobInput.value);
 
     evt.preventDefault();
     closePopup(popupProfileForm);
 }
 
 function placeFormSubmitHandler(evt) {
-    createPhotoCard(title.value, link.value);
+    evt.preventDefault();
+
+    postNewCard(titleInput.value, linkInput.value)
+        .then((item) => {
+            addCardToDOM(createCard(item.name, item.link, item.likes, item.owner._id, item._id));
+            evt.target.reset();
+            closePopup(popupPlaceForm);
+        })
+}
+
+const avatarFormSubmitHandler = (evt) => {
+    setUserAvatar(avatarLink.value)
+    avatarPicture.src = avatarLink.value;
 
     evt.preventDefault();
     evt.target.reset();
-    closePopup(popupPlaceForm);
+    closePopup(popupAvatarForm);
 }
+
+avatarButton.addEventListener('click', () => {
+    avatarSaveButton.disabled = true;
+    avatarSaveButton.classList.add('popup__submit_status_disabled');
+
+    openPopup(popupAvatarForm);
+})
 
 placeButton.addEventListener('click', function () {
     createButton.disabled = true;
@@ -83,6 +86,7 @@ closeButtons.forEach((button) => {
 
 popupProfileForm.addEventListener('submit', profileFormSubmitHandler);
 popupPlaceForm.addEventListener('submit', placeFormSubmitHandler);
+popupAvatarForm.addEventListener('submit', avatarFormSubmitHandler);
 
 enableValidation({
     formSelector: '.form',
@@ -92,3 +96,5 @@ enableValidation({
     inputErrorClass: 'popup__item_type_error',
     errorClass: 'popup__input-error'
 });
+
+renderPage();

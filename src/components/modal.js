@@ -1,9 +1,10 @@
-import { toggleButtonState } from "./validate.js";
-
 export const closeButtons = document.querySelectorAll('.popup__close');
 
 export const popupProfileForm = document.querySelector('.popup_form_edit');
 export const popupPlaceForm = document.querySelector('.popup_form_add');
+export const popupAvatarForm = document.querySelector('.popup_form_avatar');
+
+export const avatarButton = document.querySelector('.profile__picture-edit');
 
 export const placeForm = document.forms.addForm;
 export const createButton = placeForm.elements.createButton;
@@ -15,12 +16,17 @@ export const nameInput = document.querySelector('#nameInput');
 export const jobInput = document.querySelector('#jobInput');
 export const profileName = document.querySelector('.profile__name');
 export const profileJob = document.querySelector('.profile__description');
+export const avatarPicture = document.querySelector('.profile__picture');
+export const avatarLink = document.querySelector('#avatarLinkInput');
+export const avatarSaveButton = document.querySelector('#avatarSubmitButton');
 
 export const profileButton = document.querySelector('#editButton');
 export const placeButton = document.querySelector('#addButton');
 
 export const title = document.querySelector('#titleInput');
 export const link = document.querySelector('#linkInput');
+
+
 
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
