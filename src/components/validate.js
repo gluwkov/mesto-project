@@ -1,14 +1,14 @@
 const showInputError = (form, input, errorMessage, config) => {
   const inputError = form.querySelector(`.${input.id}-error`);
 
-  input.classList.add('.popup__item_type_error');
+  input.classList.add(config.inputErrorClass);
   inputError.textContent = errorMessage;
 }
 
 const hideInputError = (form, input, config) => {
   const inputError = form.querySelector(`.${input.id}-error`);
 
-  input.classList.remove('.popup__item_type_error');
+  input.classList.remove(config.inputErrorClass);
   inputError.textContent = '';
 };
 

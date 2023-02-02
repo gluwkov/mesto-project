@@ -1,48 +1,26 @@
-export const closeButtons = document.querySelectorAll('.popup__close');
-
-export const popupProfileForm = document.querySelector('.popup_form_edit');
-export const popupPlaceForm = document.querySelector('.popup_form_add');
-export const popupAvatarForm = document.querySelector('.popup_form_avatar');
-
-export const avatarButton = document.querySelector('.profile__picture-edit');
-
-export const placeForm = document.forms.addForm;
-export const createButton = placeForm.elements.createButton;
-
-export const profileForm = document.forms.editForm;
-export const saveButton = profileForm.elements.saveButton;
-
-export const nameInput = document.querySelector('#nameInput');
-export const jobInput = document.querySelector('#jobInput');
-export const profileName = document.querySelector('.profile__name');
-export const profileJob = document.querySelector('.profile__description');
-export const avatarPicture = document.querySelector('.profile__picture');
-export const avatarLink = document.querySelector('#avatarLinkInput');
-export const avatarSaveButton = document.querySelector('#avatarSubmitButton');
-
-export const profileButton = document.querySelector('#editButton');
-export const placeButton = document.querySelector('#addButton');
-
-export const title = document.querySelector('#titleInput');
-export const link = document.querySelector('#linkInput');
-
-
+export const renderLoading = (isLoading, button, buttonText, loadingText) => {
+    if (isLoading) {
+        button.value = loadingText;
+    } else {
+        button.value = buttonText;
+    }
+}
 
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
 
-    document.addEventListener('keydown', keyHandler);
-    document.addEventListener('mousedown', keyHandler);
+    document.addEventListener('keydown', handleKeyClose);
+    document.addEventListener('mousedown', handleKeyClose);
 }
 
 export function closePopup(popup) {
     popup.classList.remove('popup_opened');
 
-    document.removeEventListener('keydown', keyHandler);
-    document.removeEventListener('mousedown', keyHandler);
+    document.removeEventListener('keydown', handleKeyClose);
+    document.removeEventListener('mousedown', handleKeyClose);
 }
 
-const keyHandler = (evt) => {
+const handleKeyClose = (evt) => {
     if (evt.key === 'Escape' || evt.target.classList.contains('popup_opened')) {
         closePopup(document.querySelector('.popup_opened'));
     };

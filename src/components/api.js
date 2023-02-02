@@ -18,7 +18,6 @@ export const getUserData = () => {
         headers: apiConfig.headers
     })
         .then((res) => getAnswer(res))
-        .catch((err) => console.log(err));
 };
 
 export const getCards = () => {
@@ -26,7 +25,6 @@ export const getCards = () => {
         headers: apiConfig.headers
     })
         .then((res) => getAnswer(res))
-        .catch((err) => console.log(err));
 };
 
 export function setUserInfo(name, about) {

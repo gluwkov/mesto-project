@@ -2,8 +2,9 @@ import '../pages/index.css';
 
 import { createCard, addCardToDOM } from './card.js';
 import { enableValidation } from "./validate.js";
-import { closeButtons, popupProfileForm, popupPlaceForm, popupAvatarForm, avatarPicture, avatarLink, avatarButton, avatarSaveButton, nameInput, jobInput, profileName, profileJob, profileButton, placeButton, title, link, openPopup, closePopup, saveButton, createButton } from './modal.js';
+import { closeButtons, popupProfileForm, popupPlaceForm, popupAvatarForm, avatarPicture, avatarLink, avatarButton, avatarSaveButton, nameInput, jobInput, profileName, profileJob, profileButton, placeButton, saveButton, createButton } from './variables.js';
 import { getAppInfo, postNewCard, setUserAvatar, setUserInfo } from './api.js';
+import { renderLoading, openPopup, closePopup } from './modal.js';
 
 export let userId;
 
@@ -26,33 +27,59 @@ const renderPage = () => {
 };
 
 function profileFormSubmitHandler(evt) {
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-
-    setUserInfo(nameInput.value, jobInput.value);
-
     evt.preventDefault();
-    closePopup(popupProfileForm);
+
+    const submitButton = evt.submitter;
+    const initialText = submitButton.value;
+
+    renderLoading(true, submitButton, initialText, 'Сохранение...');
+    setUserInfo(nameInput.value, jobInput.value)
+        .then((user) => {
+            setProfileData(user);
+            closePopup(popupProfileForm)
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+            renderLoading(false, submitButton, initialText)
+        })
 }
 
 function placeFormSubmitHandler(evt) {
     evt.preventDefault();
 
+    const submitButton = evt.submitter;
+    const initialText = submitButton.value;
+
+    renderLoading(true, submitButton, initialText, 'Создание...')
     postNewCard(titleInput.value, linkInput.value)
         .then((item) => {
             addCardToDOM(createCard(item.name, item.link, item.likes, item.owner._id, item._id));
             evt.target.reset();
             closePopup(popupPlaceForm);
         })
+        .catch((err) => console.log(err))
+        .finally(() => {
+            renderLoading(false, submitButton, initialText)
+        })
 }
 
 const avatarFormSubmitHandler = (evt) => {
-    setUserAvatar(avatarLink.value)
-    avatarPicture.src = avatarLink.value;
-
     evt.preventDefault();
-    evt.target.reset();
-    closePopup(popupAvatarForm);
+
+    const submitButton = evt.submitter;
+    const initialText = submitButton.value;
+
+    renderLoading(true, submitButton, initialText, 'Сохранение...')
+    setUserAvatar(avatarLink.value)
+        .then((user) => {
+            setProfileData(user);
+            evt.target.reset();
+            closePopup(popupAvatarForm);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+            renderLoading(false, submitButton, initialText)
+        })
 }
 
 avatarButton.addEventListener('click', () => {

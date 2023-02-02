@@ -1,13 +1,7 @@
 import { userId } from "./index.js";
 import { putLikeOnServer, deleteLikeFromServer, deleteCard } from "./api.js";
 import { openPopup } from "./modal.js";
-
-export const imageForm = document.querySelector('.popup_form_photo');
-export const popupImage = document.querySelector('.formPhotoContainer__image');
-export const popupCaption = document.querySelector('.formPhotoContainer__caption');
-
-const photoCardsContainer = document.querySelector('.photos');
-const photoCardTemplate = document.querySelector('#photoCardTemplate').content;
+import { photoCardTemplate, photoCardsContainer, popupCaption, popupImage, imageForm } from "./variables.js"
 
 export const createCard = (title, link, likes, ownerId, cardId) => {
     const photoCardElement = photoCardTemplate.querySelector('.photo-card').cloneNode(true);
@@ -64,9 +58,6 @@ const openImageForm = (photoCardImage, title, link) => {
 const addlike = (button, counter, likes, cardId) => {
     return putLikeOnServer(cardId)
         .then((result) => {
-            if (!(button.classList.contains('photo-card__like-button_active'))) {
-                counter.textContent = likes.length + 1;
-            }
             button.classList.add('photo-card__like-button_active');
             counter.textContent = result.likes.length;
         })
@@ -78,9 +69,6 @@ const addlike = (button, counter, likes, cardId) => {
 const deletelike = (button, counter, likes, cardId) => {
     return deleteLikeFromServer(cardId)
         .then((result) => {
-            if (button.classList.contains('photo-card__like-button_active')) {
-                counter.textContent = likes.length - 1;
-            }
             button.classList.remove('photo-card__like-button_active');
             counter.textContent = result.likes.length > 0 ? result.likes.length : '';
         })
